@@ -1,4 +1,5 @@
 const express = require('express')
+const { getBodyArrayOrDefault, validateArray} = require('./utils')
 const app = express()
 
 // To access the payload of an HTTP POST request
@@ -19,15 +20,12 @@ app.post('/extract', (req, res, next) => {
         return
     }
 
-    const body = req.body ?? []
-    if (!Array.isArray(body)) {
-        const err = new Error('Body is not an array');
-        err.status = 400;
-        next(err);
+    const body = getBodyArrayOrDefault(req.body)
+    if (!validateArray(body)) {
         return
     }
 
-    const content = body.map(x=> x[req.query.property]);
+    const content = body.map(x => x[req.query.property]);
 
     res.json(content)
 })
@@ -42,11 +40,8 @@ app.post('/addRow', (req, res, next) => {
     }
     const value = JSON.parse(req.query.value)
 
-    const body = req.body && Object.entries(req.body).length !== 0 ? req.body : []
-    if (!Array.isArray(body)) {
-        const err = new Error('Body is not an array');
-        err.status = 400;
-        next(err);
+    const body = getBodyArrayOrDefault(req.body)
+    if (!validateArray(body)) {
         return
     }
 
