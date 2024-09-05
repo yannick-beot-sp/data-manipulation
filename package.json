@@ -4,7 +4,7 @@
   "description": "REST Endpoint to manipulate data",
   "main": "server.js",
   "scripts": {
-    "test": "jest --detectOpenHandles",
+    "test": "jest",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
