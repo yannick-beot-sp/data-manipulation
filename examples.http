@@ -1,0 +1,38 @@
+# Root Test
+
+GET http://localhost:3001/ HTTP/1.1
+
+###
+
+GET http://localhost:3001/?name=foo HTTP/1.1
+
+
+### Extract Test
+
+POST http://localhost:3001/extract?property=name HTTP/1.1
+content-type: application/json
+
+###
+[
+    {
+        "id": "1954bab361a145d6b828c3456f9d4592",
+        "name": "PRISM ERP - Report Admin",
+        "description": "Grants report administrator access to the PRISM ERP system.",
+    },
+    {
+        "id": "69a487be846f458caa6b5549a38defca",
+        "name": "PRISM ERP - User Access",
+        "description": "Grants user access to the PRISM ERP system",
+    }
+]
+
+
+###
+
+POST http://localhost:3001/addRow?value="test1" HTTP/1.1
+content-type: application/json
+
+[
+  "PRISM ERP - Report Admin",
+  "PRISM ERP - User Access"
+]
