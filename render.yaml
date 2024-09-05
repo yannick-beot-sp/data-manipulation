@@ -1,0 +1,11 @@
+# Exported from Render on 2024-09-05T12:21:20Z
+services:
+- type: web
+  name: data-manipulation
+  runtime: node
+  repo: https://github.com/yannick-beot-sp/data-manipulation
+  plan: free
+  region: oregon
+  buildCommand: npm install
+  startCommand: npm start
+version: "1"
