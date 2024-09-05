@@ -42,7 +42,7 @@ app.post('/addRow', (req, res, next) => {
     }
     const value = JSON.parse(req.query.value)
 
-    const body = req.body ?? []
+    const body = req.body && Object.entries(req.body).length !== 0 ? req.body : []
     if (!Array.isArray(body)) {
         const err = new Error('Body is not an array');
         err.status = 400;

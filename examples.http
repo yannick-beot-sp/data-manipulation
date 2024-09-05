@@ -39,3 +39,33 @@ content-type: application/json
   "PRISM ERP - Report Admin",
   "PRISM ERP - User Access"
 ]
+
+###
+
+POST {{baseUrl}}/addRow?value=%7B%22id%22%3A%22abcd%22,%22name%22%3A%22foo%22%7D HTTP/1.1
+content-type: application/json
+
+[
+    {
+        "id": "1954bab361a145d6b828c3456f9d4592",
+        "name": "PRISM ERP - Report Admin",
+        "description": "Grants report administrator access to the PRISM ERP system."
+    },
+    {
+        "id": "69a487be846f458caa6b5549a38defca",
+        "name": "PRISM ERP - User Access",
+        "description": "Grants user access to the PRISM ERP system"
+    }
+]
+
+###
+
+POST {{baseUrl}}/addRow?value=%7B%22id%22%3A%22abcd%22,%22name%22%3A%22foo%22%7D HTTP/1.1
+content-type: application/json
+
+###
+
+POST {{baseUrl}}/addRow?value=%7B%22id%22%3A%22abcd%22,%22name%22%3A%22foo%22%7D HTTP/1.1
+content-type: application/json
+
+[]
