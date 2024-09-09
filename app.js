@@ -1,5 +1,5 @@
 const express = require('express')
-const { getBodyArrayOrDefault, validateArray} = require('./utils')
+const { getBodyArrayOrDefault, validateArray, validateQuery } = require('./utils')
 const app = express()
 
 // To access the payload of an HTTP POST request
@@ -13,10 +13,7 @@ app.get('/', (req, res, next) => {
 
 app.post('/extract', (req, res, next) => {
 
-    if (!req.query.property) {
-        const err = new Error('Required query "param" property missing');
-        err.status = 400;
-        next(err);
+    if (!validateQuery(req.query, "property", next)) {
         return
     }
 
@@ -32,12 +29,10 @@ app.post('/extract', (req, res, next) => {
 
 app.post('/addRow', (req, res, next) => {
 
-    if (!req.query.value) {
-        const err = new Error('Required query "value" property missing');
-        err.status = 400;
-        next(err);
+    if (!validateQuery(req.query, "value", next)) {
         return
     }
+
     const value = JSON.parse(req.query.value)
 
     const body = getBodyArrayOrDefault(req.body)
@@ -48,6 +43,25 @@ app.post('/addRow', (req, res, next) => {
     body.push(value)
 
     res.json(body)
+})
+
+
+app.post('/split', (req, res, next) => {
+
+    if (!validateQuery(req.query, "property", next)) {
+        return
+    }
+
+    if (!validateQuery(req.query, "separator", next)) {
+        return
+    }
+
+    let result = []
+    if (req.body) {
+        result = req.body[req.query.property]?.split(req.query.separator) ?? []
+    }
+
+    res.send(result)
 })
 
 module.exports = app;

@@ -69,3 +69,12 @@ POST {{baseUrl}}/addRow?value=%7B%22id%22%3A%22abcd%22,%22name%22%3A%22foo%22%7D
 content-type: application/json
 
 []
+
+###
+
+POST {{baseUrl}}/split?property=test&separator=%0A HTTP/1.1
+content-type: application/json
+
+{
+    "test": "a\nb\nc"
+}

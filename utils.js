@@ -20,4 +20,18 @@ const validateArray= (arr, next) => {
     return true
 }
 
-module.exports = {getBodyArrayOrDefault, validateArray}
+/**
+ * 
+ */
+const validateQuery= (query, name, next) => {
+    if (!query[name]) {
+        const err = new Error(`Required query param "${name}" missing`);
+        err.status = 400;
+        next(err);
+        return false
+    }
+
+    return true
+}
+
+module.exports = {getBodyArrayOrDefault, validateArray, validateQuery}
