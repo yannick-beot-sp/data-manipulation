@@ -1,10 +1,9 @@
 @baseUrl = http://localhost:3001
 
-
+###
 # Root Test
 
 GET {{baseUrl}}/ HTTP/1.1
-
 ###
 
 GET {{baseUrl}}/?name=foo HTTP/1.1
@@ -28,8 +27,6 @@ content-type: application/json
         "description": "Grants user access to the PRISM ERP system"
     }
 ]
-
-
 ###
 
 POST {{baseUrl}}/addRow?value="test1" HTTP/1.1
@@ -39,7 +36,6 @@ content-type: application/json
   "PRISM ERP - Report Admin",
   "PRISM ERP - User Access"
 ]
-
 ###
 
 POST {{baseUrl}}/addRow?value=%7B%22id%22%3A%22abcd%22,%22name%22%3A%22foo%22%7D HTTP/1.1
@@ -57,19 +53,16 @@ content-type: application/json
         "description": "Grants user access to the PRISM ERP system"
     }
 ]
-
 ###
 
 POST {{baseUrl}}/addRow?value=%7B%22id%22%3A%22abcd%22,%22name%22%3A%22foo%22%7D HTTP/1.1
 content-type: application/json
-
 ###
 
 POST {{baseUrl}}/addRow?value=%7B%22id%22%3A%22abcd%22,%22name%22%3A%22foo%22%7D HTTP/1.1
 content-type: application/json
 
 []
-
 ###
 
 POST {{baseUrl}}/split?property=test&separator=%0A HTTP/1.1
@@ -78,3 +71,19 @@ content-type: application/json
 {
     "test": "a\nb\nc"
 }
+###
+POST {{baseUrl}}/tidyjs/map?mapFn=x => (x.test) HTTP/1.1
+content-type: application/json
+
+[{
+    "test": "a\nb\nc"
+}]
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+content-type: application/json; charset=utf-8
+content-length: 11
+etag: W/"b-JyuzRQaFd9Agpe4RB3xxXMimRnw"
+date: Wed, 02 Oct 2024 09:22:44 GMT
+connection: keep-alive
+keep-alive: timeout=120

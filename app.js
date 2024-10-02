@@ -1,10 +1,12 @@
 const express = require('express')
 const { getBodyArrayOrDefault, validateArray, validateQuery } = require('./utils')
 const app = express()
+const tidyjs = require('./tidy')
 
 // To access the payload of an HTTP POST request
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/tidyjs', tidyjs);
 
 app.get('/', (req, res, next) => {
     var name = req.query.name ?? "World"
